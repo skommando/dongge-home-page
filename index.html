@@ -1,12 +1,190 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>网站筹备中</title>
-</head>
-<body>
-<main><h1>网站筹备中</h1><p>正式内容尚未发布。</p></main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#090b0d" />
+    <meta
+      name="description"
+      content="Dongge Racing · 在地球上探索赛道，挑战属于你的飞行圈。非官方赛车互动体验。"
+    />
+    <title>Dongge Racing — Every Second Counts</title>
+    <script type="module" crossorigin src="/assets/index-CYkpFjv-.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/three-D_XL-kTh.js">
+    <link rel="modulepreload" crossorigin href="/assets/loaders-CZ6uYKtu.js">
+    <link rel="modulepreload" crossorigin href="/assets/controls-BJj1M8ZQ.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-D79h1O-0.css">
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <a class="brand" href="#" aria-label="Dongge Racing 首页"
+          ><span class="brand-mark">D<span>G</span></span
+          ><span
+            >DONGGE<span class="brand-sub">RACING / EST. 2026</span></span
+          ></a
+        >
+        <nav>
+          <button id="navExplore" class="nav-active">
+            探索赛历 <span>01</span></button
+          ><button id="navRecords">个人记录 <span>02</span></button
+          ><button id="aboutBtn">项目说明 <span>03</span></button>
+        </nav>
+        <button id="mute" aria-label="切换静音">
+          声音 <span id="soundState">OFF</span>
+        </button>
+      </header>
+      <main id="explore">
+        <canvas id="worldBackdrop" aria-hidden="true"></canvas>
+        <div class="season-label">
+          <span class="red-dot"></span> WORLD TOUR <b>2026</b
+          ><span class="season-line"></span
+          ><span>23 DESTINATIONS. ONE OBSESSION.</span>
+        </div>
+        <div class="hero-grid">
+          <section class="race-info">
+            <div class="round-line">
+              <span id="round">ROUND 01 / 23</span><span id="raceFlag"></span>
+            </div>
+            <p class="eyebrow" id="country">AUSTRALIA</p>
+            <h1 id="raceTitle">澳大利亚<span>大奖赛</span></h1>
+            <p id="circuitName" class="circuit-name"></p>
+            <div class="race-facts">
+              <div>
+                <span>比赛周末 · 当地日期</span><strong id="raceDate">—</strong>
+              </div>
+              <div><span>正赛圈数</span><strong id="raceLaps">—</strong></div>
+              <div>
+                <span>正赛发车 · UTC+8</span
+                ><strong id="raceTime">待核实</strong>
+              </div>
+              <div>
+                <span>获胜车手</span><strong id="raceWinner">待核实</strong>
+              </div>
+            </div>
+            <div id="globeWrap">
+              <canvas id="globe"></canvas>
+              <div class="globe-caption">
+                <span class="crosshair">+</span><span id="coordinates"></span
+                ><span>EARTH NAVIGATION</span>
+              </div>
+            </div>
+            <div class="nav-controls">
+              <button id="prev" aria-label="上一分站">←</button
+              ><select id="raceSelect" aria-label="选择分站"></select
+              ><button id="next" aria-label="下一分站">→</button>
+            </div>
+          </section>
+          <section class="track-panel">
+            <div class="panel-top">
+              <span><i class="red-dot"></i> CIRCUIT EXPLORER</span
+              ><span id="trackLength">— KM</span>
+            </div>
+            <div id="trackStage">
+              <canvas id="track3d"></canvas>
+              <div id="trackLabels"></div>
+              <div class="track-watermark" id="trackWatermark">01</div>
+              <div class="track-instruction">拖动旋转 · 滚轮切换分站</div>
+            </div>
+            <div class="track-bottom">
+              <div>
+                <span class="eyebrow">THE NEXT LAP IS YOURS</span>
+                <h2>每一秒，都由你定义。</h2>
+              </div>
+              <div class="track-actions">
+                <button id="lapEntry" class="primary">
+                  飞行圈挑战 <span>↗︎</span></button
+                ><button id="pitEntry" class="secondary">
+                  极速换胎 <span>↗︎</span>
+                </button>
+              </div>
+            </div>
+            <p id="elevationSummary"></p>
+            <div class="data-disclosure">
+              <span id="geometryStatus">真实路线 / 高程示意</span
+              ><button id="sourcesBtn">资料与来源 ↗︎</button>
+            </div>
+          </section>
+        </div>
+        <div class="calendar-strip" id="calendarStrip"></div>
+        <footer>
+          <span>INDEPENDENT RACING EXPERIENCE</span
+          ><span>非官方项目 · 原创模型与合成音效 · 个人本地记录</span
+          ><span id="checkedDate">DATA CHECKED / 2026.10.22</span>
+        </footer>
+      </main>
+      <section id="game" class="hidden">
+        <div class="game-header">
+          <button id="exitGame">← 返回地球</button>
+          <div>
+            <span id="gameEyebrow" class="eyebrow">PERSONAL TIME ATTACK</span>
+            <h2 id="gameTitle">飞行圈挑战</h2>
+          </div>
+          <button id="restartGame">重新挑战 ↻</button>
+        </div>
+        <div class="game-layout">
+          <div id="gameSurface">
+            <canvas id="lapCanvas"></canvas
+            ><canvas id="pitCanvas" class="hidden"></canvas>
+            <div id="touchStart" class="hidden" aria-hidden="true">按住</div>
+            <div id="gameHint" role="status"></div>
+            <div id="pitReticle" class="hidden">+</div>
+            <div id="timerCard">
+              <div>
+                <span id="timerLabel">READY TO RACE</span
+                ><strong id="totalTime">00:00.000</strong>
+              </div>
+              <div class="sectors">
+                <div id="s1">S1 <b>—</b></div>
+                <div id="s2">S2 <b>—</b></div>
+                <div id="s3">S3 <b>—</b></div>
+              </div>
+            </div>
+            <div id="gameResult" class="hidden"></div>
+          </div>
+          <aside class="leaderboard">
+            <span class="eyebrow">YOUR OWN RIVAL</span>
+            <h3>个人排行榜</h3>
+            <div class="personal-best">
+              <span>PERSONAL BEST</span><strong id="bestTime">—</strong>
+            </div>
+            <div class="rank-head">
+              <span>排名</span><span>成绩 / 日期</span>
+            </div>
+            <ol id="rankList"></ol>
+            <p class="local-note">
+              记录仅保存在当前浏览器。清除浏览数据或更换设备后无法找回。
+            </p>
+            <button id="clearRecords">清空本地记录</button>
+            <p id="storageWarning" role="alert"></p>
+          </aside>
+        </div>
+      </section>
+      <div id="intro">
+        <div class="intro-top">
+          <span>DONGGE RACING</span><span>2026 / WORLD CIRCUIT EXPERIENCE</span>
+        </div>
+        <div class="intro-content">
+          <p class="eyebrow">FIVE LIGHTS. ONE MOMENT.</p>
+          <h2>IT'S LIGHTS<br /><span>OUT.</span></h2>
+          <div class="lights" id="lights">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p id="introStatus">23 条赛道。两种挑战。你的下一次突破。</p>
+          <button id="startExperience" class="primary">
+            启动体验 <span>↗︎</span></button
+          ><button id="skipIntro">静音进入 →</button
+          ><small>点击后播放原创合成音效，可随时静音</small>
+        </div>
+        <div class="intro-bottom">
+          <span>BUILT FOR THE MOMENT</span><span>非官方 · 原创交互体验</span>
+        </div>
+      </div>
+      <dialog id="infoDialog">
+        <button id="closeDialog" aria-label="关闭">×</button>
+        <div id="dialogContent"></div>
+      </dialog>
+      <div id="toast" role="status" class="hidden"></div>
+    </div>
+  </body>
 </html>
